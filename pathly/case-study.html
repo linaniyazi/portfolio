@@ -1,0 +1,429 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}</style>
+<title>Pathly Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; feature sections alternate text and a framed screenshot, stacking on phones. */
+:root {
+  /* Dark-first, matching the Pathly app's own palette */
+  --bg: #0a0f1e;
+  --surface: #111827;
+  --surface-2: #0e1526;
+  --line: #1f2a40;
+  --fg: #eef2f8;
+  --muted: #94a3b8;
+  --violet: #8b7ff0;
+  --sky: #38bdf8;
+  --amber: #f5a524;
+  --amber-soft: rgba(245, 165, 36, 0.12);
+  --green: #34d399;
+  --red: #f87171;
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  --display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f6fb; --surface: #ffffff; --surface-2: #eef0f7; --line: #dde2ee;
+    --fg: #0f172a; --muted: #556074; --violet: #5f52c9; --sky: #0277b5;
+    --amber: #a85d00; --amber-soft: rgba(217, 119, 6, 0.1); --green: #0f8a5f; --red: #c2410c;
+    --shadow: 0 24px 50px -28px rgba(15, 23, 42, 0.35);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f5f6fb; --surface: #ffffff; --surface-2: #eef0f7; --line: #dde2ee;
+  --fg: #0f172a; --muted: #556074; --violet: #5f52c9; --sky: #0277b5;
+  --amber: #a85d00; --amber-soft: rgba(217, 119, 6, 0.1); --green: #0f8a5f; --red: #c2410c;
+  --shadow: 0 24px 50px -28px rgba(15, 23, 42, 0.35);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 1080px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 40px 80px; }
+
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.3rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; }
+.lede { font-size: clamp(1.08rem, 2vw, 1.25rem); color: var(--muted); max-width: 60ch; }
+.prose { max-width: 62ch; color: var(--muted); display: grid; gap: 14px; }
+.prose strong { color: var(--fg); font-weight: 600; }
+.label {
+  font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sky);
+}
+code { font-family: var(--mono); font-size: 0.86em; background: var(--surface-2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 6px; color: var(--fg); }
+
+/* ── Hero ── */
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1.2rem; }
+.brand-mark {
+  width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--violet), var(--sky)); color: #fff; font-size: 0.95rem;
+}
+.hero { display: grid; gap: 22px; padding-block: 36px 28px; }
+.hero h1 em { font-style: normal; color: var(--amber); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-family: var(--mono); font-size: 0.75rem; padding: 4px 10px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--muted); background: var(--surface);
+}
+
+.shot { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.shot img {
+  display: block; width: 100%; height: auto; border-radius: 14px;
+  border: 1px solid var(--line); box-shadow: var(--shadow); background: #0a0f1e;
+}
+.shot figcaption { font-size: 0.85rem; color: var(--muted); }
+.hero-shot { margin-top: 12px; }
+
+/* ── Sections ── */
+section { padding-block: 64px 0; display: grid; gap: 28px; }
+.section-head { display: grid; gap: 12px; }
+.split { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 860px) {
+  .split { grid-template-columns: 5fr 7fr; }
+  .split--flip { grid-template-columns: 7fr 5fr; }
+  .split--flip > .split-text { order: 2; }
+}
+.split-text { display: grid; gap: 16px; min-width: 0; }
+
+.contrast { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.contrast-col { padding: 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
+.contrast-col ul { margin: 0; padding-left: 1.1em; color: var(--muted); display: grid; gap: 6px; }
+.contrast-col--pathly { border-color: color-mix(in srgb, var(--violet) 55%, var(--line)); }
+.contrast-col h3 { display: flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.contrast-col--pathly .dot { background: var(--violet); }
+
+/* Before/after pair for the adaptive path */
+.pair { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+.callout {
+  border-left: 3px solid var(--amber); background: var(--amber-soft); padding: 12px 16px; border-radius: 0 10px 10px 0;
+  color: var(--fg); font-size: 0.95rem;
+}
+
+/* Leitner schedule */
+.schedule { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.box {
+  flex: 1 1 90px; min-width: 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); display: grid; gap: 2px; text-align: center;
+}
+.box-num { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+.box-days { font-family: var(--display); font-weight: 800; font-size: 1.5rem; color: var(--sky); font-variant-numeric: tabular-nums; }
+.box-sub { font-size: 0.75rem; color: var(--muted); }
+.box--done { border-color: color-mix(in srgb, var(--green) 50%, var(--line)); }
+.box--done .box-days { color: var(--green); font-size: 1.1rem; align-self: center; }
+.rules { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 0.9rem; color: var(--muted); }
+.rules span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.rules .ok::before { background: var(--green); }
+.rules .miss::before { background: var(--red); }
+
+/* Link verification flow */
+.checks { display: grid; gap: 10px; }
+.check { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 14px 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.check-icon { font-family: var(--mono); font-size: 0.8rem; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--surface-2); color: var(--sky); border: 1px solid var(--line); }
+.check p { color: var(--muted); font-size: 0.92rem; }
+.check strong { color: var(--fg); font-weight: 600; display: block; margin-bottom: 2px; }
+
+/* Journey strip: a real sequence, so it's numbered */
+.journey { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); counter-reset: step; }
+.journey .shot figcaption { display: flex; gap: 10px; align-items: baseline; }
+.journey .shot figcaption::before {
+  counter-increment: step; content: counter(step, decimal-leading-zero);
+  font-family: var(--mono); font-size: 0.75rem; color: var(--sky);
+}
+
+.diagram { overflow-x: auto; padding: 20px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
+.flow { display: grid; gap: 14px; }
+.flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.flow-node { padding: 9px 13px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); font-size: 0.9rem; }
+.flow-node--hot { border-color: var(--violet); }
+.flow-node--warn { border-color: var(--amber); background: var(--amber-soft); }
+.flow-arrow { color: var(--muted); font-family: var(--mono); }
+.flow-tag { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); }
+.flow-tag--ok { color: var(--green); border-color: color-mix(in srgb, var(--green) 55%, var(--line)); }
+.flow-tag--miss { color: var(--red); border-color: color-mix(in srgb, var(--red) 55%, var(--line)); }
+.flow-branch { display: grid; gap: 10px; margin-left: 12px; padding-left: 16px; border-left: 2px solid var(--line); }
+
+.stack { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.stack-item { padding: 18px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 6px; align-content: start; }
+.stack-item p { color: var(--muted); font-size: 0.92rem; }
+
+.mobile-row { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 760px) { .mobile-row { grid-template-columns: 1fr 300px; } }
+.mobile-row .shot img { border-radius: 28px; }
+
+.next { margin: 0; padding-left: 1.1em; color: var(--muted); display: grid; gap: 8px; max-width: 62ch; }
+.next strong { color: var(--fg); font-weight: 600; }
+
+footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero > * { animation: rise 0.6s ease both; }
+  .hero > *:nth-child(2) { animation-delay: 0.05s; }
+  .hero > *:nth-child(3) { animation-delay: 0.1s; }
+  .hero > *:nth-child(4) { animation-delay: 0.15s; }
+  @keyframes rise { from { transform: translateY(8px); } to { transform: none; } }
+}
+</style>
+
+<main class="page">
+  <header class="hero">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">↗</span> Pathly</div>
+    <h1>An AI tutor that changes the plan when <em>you get something wrong</em>.</h1>
+    <p class="lede">Pathly turns a learning goal into a personalized skill path, quizzes you on every step, and rewrites the path around the exact questions you miss.</p>
+    <div class="tags" aria-label="Tech stack">
+      <span class="tag">React 18</span><span class="tag">Vite</span><span class="tag">Python · FastAPI</span>
+      <span class="tag">SQLite</span><span class="tag">Google Gemini</span><span class="tag">Playwright</span>
+    </div>
+    <figure class="shot hero-shot">
+      <img src="screenshots/08-adapted-path.png" alt="Pathly learning path with two amber 'Added for you' catch-up steps inserted before a failed skill" width="2560" height="1600">
+      <figcaption>After a failed quiz, two catch-up steps were inserted before the skill. Each one names the misconception it fixes.</figcaption>
+    </figure>
+  </header>
+
+  <section aria-labelledby="problem">
+    <div class="section-head">
+      <span class="label">The problem</span>
+      <h2 id="problem">A study plan is one prompt away. Following it is the hard part.</h2>
+    </div>
+    <div class="prose">
+      <p>Ask any chatbot for "a roadmap to become a data analyst" and you get a decent list in seconds. The first version of Pathly did the same thing with a nicer interface, and it was easy to replace.</p>
+      <p>A plan only helps if it reacts to the learner. So I rebuilt Pathly around three things a single prompt can't do: <strong>remember what you got wrong, bring it back before you forget it, and only send you to resources that actually exist.</strong></p>
+    </div>
+    <div class="contrast">
+      <div class="contrast-col">
+        <h3><span class="dot" aria-hidden="true"></span>A chatbot plan</h3>
+        <ul>
+          <li>Static list, same for every learner</li>
+          <li>Forgets you between conversations</li>
+          <li>No idea whether you understood a step</li>
+          <li>Links are often broken or invented</li>
+        </ul>
+      </div>
+      <div class="contrast-col contrast-col--pathly">
+        <h3><span class="dot" aria-hidden="true"></span>Pathly</h3>
+        <ul>
+          <li>Placement test sizes the path to your level and weekly hours</li>
+          <li>Stores every quiz answer and reuses it</li>
+          <li>A quiz checks each skill before you move on</li>
+          <li>Every link is verified before you see it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="adaptive">
+    <div class="section-head">
+      <span class="label">Feature 1 · Adaptive path</span>
+      <h2 id="adaptive">Fail a quiz, and the path grows the steps you were missing</h2>
+    </div>
+    <div class="pair">
+      <figure class="shot">
+        <img src="screenshots/07-quiz-failed.png" alt="Quiz result screen showing 0 out of 7 and an Adapt My Path button" width="2560" height="1600" loading="lazy">
+        <figcaption>The learner fails the skill quiz. Each missed question is listed with an explanation.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/08-adapted-path.png" alt="Learning path now showing 10 skills with two catch-up steps marked Added for you" width="2560" height="1600" loading="lazy">
+        <figcaption>One click on "Adapt My Path" and the path goes from 8 to 10 steps.</figcaption>
+      </figure>
+    </div>
+    <div class="prose">
+      <p>The backend loads the incorrect answers from the learner's latest quiz on that skill and asks Gemini to <strong>diagnose the misconceptions behind them</strong>, grouping related mistakes into one or two narrow catch-up steps. A step like "Variable naming rules and scope" is smaller than the skill it supports, so it isn't the same lesson again.</p>
+      <p>The steps are inserted directly before the failed skill and the later steps shift down. Each one stores the skill it supports and the gap it fixes, which the UI shows as an amber "Added for you" badge.</p>
+    </div>
+    <p class="callout">A cap of two catch-up steps per skill keeps a struggling learner's path from growing forever. After that, Pathly asks them to work through what's already there.</p>
+  </section>
+
+  <section aria-labelledby="review">
+    <div class="split split--flip">
+      <div class="split-text">
+        <span class="label">Feature 2 · Spaced repetition</span>
+        <h2 id="review">Missed questions come back right before you'd forget them</h2>
+        <div class="prose">
+          <p>Every question you get wrong becomes a review card. Cards follow a <strong>Leitner box</strong> schedule, and the Dashboard shows how many are due today.</p>
+        </div>
+        <div class="schedule" aria-label="Review schedule">
+          <div class="box"><span class="box-num">BOX 0</span><span class="box-days">1d</span><span class="box-sub">new miss</span></div>
+          <div class="box"><span class="box-num">BOX 1</span><span class="box-days">3d</span><span class="box-sub">after review</span></div>
+          <div class="box"><span class="box-num">BOX 2</span><span class="box-days">7d</span><span class="box-sub">after review</span></div>
+          <div class="box"><span class="box-num">BOX 3</span><span class="box-days">14d</span><span class="box-sub">after review</span></div>
+          <div class="box box--done"><span class="box-num">DONE</span><span class="box-days">Mastered</span></div>
+        </div>
+        <p class="rules"><span class="ok">Correct: move up one box</span><span class="miss">Miss: back to box 0, due tomorrow</span></p>
+      </div>
+      <figure class="shot">
+        <img src="screenshots/10-daily-review.png" alt="Review flashcard showing a missed answer, its explanation, and 'Next review in 1 day'" width="2560" height="1600" loading="lazy">
+        <figcaption>Each answer reschedules the card and tells the learner when they'll see it again.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="links">
+    <div class="split">
+      <div class="split-text">
+        <span class="label">Feature 3 · Verified resources</span>
+        <h2 id="links">Catching the links the AI made up</h2>
+        <div class="prose">
+          <p>While testing, I checked the YouTube links Gemini suggested. Many of the video IDs pointed to videos that don't exist. A YouTube watch page returns 200 even for a fake ID, so a normal link check can't catch this.</p>
+        </div>
+      </div>
+      <div class="checks">
+        <div class="check">
+          <span class="check-icon" aria-hidden="true">1</span>
+          <p><strong>Allow-list</strong>The model may only cite trusted learning sites and official docs (Python, pandas, NumPy, MDN and others). The prompt and the validator share one list.</p>
+        </div>
+        <div class="check">
+          <span class="check-icon" aria-hidden="true">2</span>
+          <p><strong>Existence check</strong>Videos go through YouTube's <code>oEmbed</code> endpoint, which returns 404 for IDs that don't exist. Other pages get a HEAD request with a GET fallback.</p>
+        </div>
+        <div class="check">
+          <span class="check-icon" aria-hidden="true">3</span>
+          <p><strong>Graceful fallback</strong>An invented video becomes a YouTube search for its title, so every step still has a working video.</p>
+        </div>
+        <div class="check">
+          <span class="check-icon" aria-hidden="true">4</span>
+          <p><strong>No false alarms</strong>Only a definite 400/404/410 rejects a link. Timeouts and proxy TLS errors keep it, and all links are checked in parallel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="journey">
+    <div class="section-head">
+      <span class="label">The full journey</span>
+      <h2 id="journey">From a sentence to a personalized path</h2>
+    </div>
+    <div class="journey">
+      <figure class="shot">
+        <img src="screenshots/02-goal.png" alt="Goal input with an AI 'Clear goal' check and level selection" width="2560" height="1600" loading="lazy">
+        <figcaption>Type a goal. The AI checks it's a real learning goal while you pick a level.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/03-assessment.png" alt="Placement question card with Yes, No and I don't know buttons" width="2560" height="1600" loading="lazy">
+        <figcaption>Ten placement questions, tailored to the level you chose.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/04-answer-review.png" alt="Answer review showing 6 of 10 correct with explanations" width="2560" height="1600" loading="lazy">
+        <figcaption>An answer review explains every question before the path is built.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/05-learning-path.png" alt="Generated learning path with resources for the first skill" width="2560" height="1600" loading="lazy">
+        <figcaption>An ordered path sized to your level and weekly study hours, with videos and docs.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/06-quiz-feedback.png" alt="Skill quiz question with instant feedback and explanation" width="2560" height="1600" loading="lazy">
+        <figcaption>Each skill ends with a 7-question quiz and instant feedback.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="screenshots/09-dashboard.png" alt="Dashboard with stats, Daily Review card and quiz history" width="2560" height="1600" loading="lazy">
+        <figcaption>The Dashboard brings it together: progress, quiz history and today's review.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="how">
+    <div class="section-head">
+      <span class="label">How it works</span>
+      <h2 id="how">The learning loop</h2>
+    </div>
+    <div class="diagram flow" role="img" aria-label="Flow: goal, AI goal check, placement test, personalized path, skill quiz. Pass moves to the next skill. Fail produces missed questions, which insert catch-up steps before the skill and create review cards at 1, 3, 7 and 14 days.">
+      <div class="flow-row">
+        <span class="flow-node">Goal</span><span class="flow-arrow">→</span>
+        <span class="flow-node">AI goal check</span><span class="flow-arrow">→</span>
+        <span class="flow-node">Placement test</span><span class="flow-arrow">→</span>
+        <span class="flow-node">Personalized path</span><span class="flow-arrow">→</span>
+        <span class="flow-node flow-node--hot">Skill quiz</span>
+      </div>
+      <div class="flow-branch">
+        <div class="flow-row">
+          <span class="flow-tag flow-tag--ok">Pass</span><span class="flow-arrow">→</span>
+          <span class="flow-node">Next skill</span>
+        </div>
+        <div class="flow-row">
+          <span class="flow-tag flow-tag--miss">Fail</span><span class="flow-arrow">→</span>
+          <span class="flow-node flow-node--warn">Missed questions</span>
+        </div>
+        <div class="flow-branch">
+          <div class="flow-row">
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Catch-up steps inserted before the skill</span><span class="flow-arrow">→</span>
+            <span class="flow-node">Retry the quiz</span>
+          </div>
+          <div class="flow-row">
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Review cards at 1, 3, 7 and 14 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="stack-item">
+        <span class="label">Frontend</span>
+        <h3>React 18 + Vite</h3>
+        <p>Screens for every step, plain CSS with no UI kit, an AI chat assistant in English and Arabic, and a mobile bottom nav.</p>
+      </div>
+      <div class="stack-item">
+        <span class="label">Backend</span>
+        <h3>FastAPI + SQLite</h3>
+        <p>REST API with Pydantic validation and additive schema migrations. The adaptive-path and spaced-repetition logic live here.</p>
+      </div>
+      <div class="stack-item">
+        <span class="label">AI</span>
+        <h3>Google Gemini</h3>
+        <p>Seven prompts: goal check, placement test, answer review, path, quiz and catch-up steps return strict JSON; the chat tutor replies in plain text.</p>
+      </div>
+      <div class="stack-item">
+        <span class="label">Tooling</span>
+        <h3>Playwright</h3>
+        <p>A script walks the full journey in Edge and regenerates every screenshot on this page.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mobile">
+    <div class="mobile-row">
+      <div class="split-text">
+        <span class="label">Responsive</span>
+        <h2 id="mobile">Built for a quick review on the bus</h2>
+        <div class="prose">
+          <p>A daily review only works if it's easy to open. On phones, Pathly switches to a bottom navigation bar and stacks the dashboard, so the review card is one tap from the home screen.</p>
+        </div>
+      </div>
+      <figure class="shot">
+        <img src="screenshots/11-mobile-dashboard.png" alt="Pathly dashboard on a phone with the Daily Review card and bottom navigation" width="1170" height="2532" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="next">
+    <div class="section-head">
+      <span class="label">What's next</span>
+      <h2 id="next">Roadmap</h2>
+    </div>
+    <ul class="next">
+      <li><strong>Real sessions.</strong> Replace the username stored in the browser with signed tokens.</li>
+      <li><strong>"Prove it" checkpoints.</strong> Submit code or a written explanation and get rubric-based AI feedback.</li>
+      <li><strong>Calendar re-planning.</strong> Turn weekly study hours into dated milestones that shift when you fall behind.</li>
+      <li><strong>SDK upgrade.</strong> Move from <code>google-generativeai</code> to the newer <code>google-genai</code> SDK.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Pathly · AI learning path builder</span>
+    <span>React · FastAPI · SQLite · Gemini</span>
+  </footer>
+</main>

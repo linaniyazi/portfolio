@@ -1,0 +1,832 @@
+<title>Lina Niyazi</title>
+<meta name="description" content="Lina Niyazi, AI and software developer in Damascus. Computer vision, machine learning, Flutter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Quiet engineering-editorial layout: warm-neutral paper, one steel-blue accent, flat hairline cards. */
+:root {
+  --bg: #F4F5F3;
+  --surface: #FFFFFF;
+  --ink: #16181D;
+  --muted: #5B626E;
+  --line: #E3E4E2;
+  --accent: #2B5C8A;
+  --accent-soft: #E7EDF3;
+  --pop: #2B5C8A;
+  --ok: #3C8C66;
+  --cat-blue: #2B5C8A;
+  --cat-teal: #0E8C7F;
+  --cat-violet: #6A57C7;
+  --cat-green: #2F9E6B;
+  --cat-amber: #9A7400;
+  --dot: rgba(22,24,29,.035);
+  --shadow: 0 1px 2px rgba(22,24,29,.04), 0 12px 28px -18px rgba(22,24,29,.14);
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121417; --surface: #1A1D22; --ink: #E8EAED; --muted: #969CA6; --line: #272B31;
+    --accent: #7FB0DC; --accent-soft: #1D2938; --pop: #7FB0DC; --ok: #4FBE8A; color-scheme: dark;
+    --cat-blue: #7FB0DC; --cat-teal: #4FC9BA; --cat-violet: #A99CF0; --cat-green: #5FC98E; --cat-amber: #E0B64B;
+    --dot: rgba(232,234,237,.04);
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 14px 30px -18px rgba(0,0,0,.62);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121417; --surface: #1A1D22; --ink: #E8EAED; --muted: #969CA6; --line: #272B31;
+  --accent: #7FB0DC; --accent-soft: #1D2938; --pop: #7FB0DC; --ok: #4FBE8A; color-scheme: dark;
+  --cat-blue: #7FB0DC; --cat-teal: #4FC9BA; --cat-violet: #A99CF0; --cat-green: #5FC98E; --cat-amber: #E0B64B;
+  --dot: rgba(232,234,237,.04);
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 14px 30px -18px rgba(0,0,0,.62);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--dot) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--dot) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px;
+  background-position: center, center;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  padding-inline: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 1120px; margin-inline: auto; }
+
+/* nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(10px);
+  margin-inline: -20px; padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; gap: 24px; }
+.logo { font-family: var(--display); font-weight: 800; font-size: 20px; text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 22px; margin-left: auto; font-size: 15px; }
+.nav-links a { text-decoration: none; color: var(--muted); }
+.nav-links a:hover { color: var(--ink); }
+.icon-btn {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  border-radius: 50%; cursor: pointer;
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn .moon { display: none; }
+:root[data-theme="dark"] .icon-btn .sun { display: none; }
+:root[data-theme="dark"] .icon-btn .moon { display: block; }
+@media (max-width: 760px) { .nav-links { display: none; } .nav .icon-btn { margin-left: auto; } }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 600 15px/1 var(--body); text-decoration: none;
+  padding: 13px 18px; border-radius: 999px; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--bg); cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 16px; height: 16px; }
+.btn-sm { padding: 9px 14px; font-size: 14px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 40px; align-items: center; padding-block: 48px 56px; }
+.hero > * { min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 500 13px var(--mono); color: var(--muted);
+  border: 1px solid var(--line); background: var(--surface);
+  padding: 6px 12px; border-radius: 999px;
+}
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent); }
+.status.accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 42%, var(--line)); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.status.accent svg { width: 14px; height: 14px; }
+h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(42px, 6vw, 72px); line-height: 1.02; letter-spacing: -0.035em;
+  margin: 22px 0 18px; text-wrap: balance;
+}
+h1 .hi { display: block; font-size: 0.42em; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); margin-bottom: 10px; }
+h1 em { font-style: normal; color: var(--accent); }
+.lede { color: var(--muted); max-width: 46ch; font-size: 18px; margin: 0 0 28px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* camera feed */
+.feed { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.feed-top {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 12px; border-bottom: 1px solid var(--line);
+  font: 500 12px var(--mono); color: var(--muted);
+}
+.rec { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 1.4s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.modes { margin-left: auto; display: flex; gap: 2px; background: var(--bg); padding: 2px; border-radius: 999px; border: 1px solid var(--line); }
+.modes button {
+  font: 500 12px var(--mono); color: var(--muted); background: none; border: 0;
+  padding: 4px 10px; border-radius: 999px; cursor: pointer;
+}
+.modes button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgb(0 0 0 / .12); }
+canvas#road { display: block; width: 100%; aspect-ratio: 4 / 3; background: #E9EBEF; }
+.readout { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.readout div { padding: 10px 12px; font: 400 11px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.readout div + div { border-left: 1px solid var(--line); }
+.readout b { display: block; font: 500 18px var(--mono); color: var(--ink); text-transform: none; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.feed-cap { font-size: 13px; color: var(--muted); margin: 10px 2px 0; }
+
+/* sections */
+section { padding-block: 52px; }
+
+/* flat hairline card hugging each individual block of text */
+.tbox,
+.hero > div:first-child,
+.sec-head,
+.about > div,
+.about > .traits,
+.feature > div:not(.media),
+.timeline li,
+.skills > div {
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: clamp(18px, 2.4vw, 26px);
+  box-shadow: var(--shadow);
+}
+.contact .tbox { max-width: 44rem; }
+.contact .actions { margin-top: 26px; }
+.sec-head { margin-bottom: 26px; }
+.sec-head .eyebrow { display: block; margin-bottom: 10px; }
+.eyebrow { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--accent); }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4vw, 44px); line-height: 1.08; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 8px; }
+.sec-body { margin-left: 0; }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding-block: 40px 56px; }
+  .sec-head { grid-template-columns: 1fr; gap: 6px; }
+  .sec-body { margin-left: 0; }
+  .eyebrow { padding-top: 0; }
+}
+
+/* about */
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
+.about > * { min-width: 0; }
+.about p { margin: 0 0 16px; max-width: 62ch; }
+.traits { display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.traits li { display: grid; grid-template-columns: 32px 1fr; gap: 10px; align-items: start; }
+.traits svg { width: 22px; height: 22px; color: var(--accent); margin-top: 3px; }
+.traits b { display: block; font-family: var(--display); font-weight: 600; font-size: 18px; }
+.traits span { color: var(--muted); font-size: 15px; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+
+/* featured projects */
+.feature { display: grid; grid-template-columns: 1.1fr 1fr; gap: 44px; align-items: center; padding-block: 36px; }
+.feature > * { min-width: 0; }
+.feature:nth-child(even) .media { order: 2; }
+.media {
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  aspect-ratio: 16 / 11; max-width: 100%; overflow: hidden; display: grid; place-items: center; position: relative;
+  box-shadow: var(--shadow);
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+.tag-row li { font: 500 12px var(--mono); padding: 4px 9px; border-radius: 4px; background: color-mix(in srgb, var(--cat, var(--accent)) 13%, var(--surface)); color: var(--cat, var(--accent)); }
+.kind { font: 500 12px var(--mono); color: var(--cat, var(--accent)); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+.feature p { color: var(--muted); margin: 0 0 12px; }
+.points { margin: 12px 0 0; padding-left: 18px; color: var(--ink); font-size: 16px; }
+.points li { margin-bottom: 4px; }
+.points li::marker { color: var(--cat, var(--accent)); }
+.link-row { display: flex; gap: 16px; margin-top: 18px; font: 500 14px var(--mono); }
+.link-row a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.link-row a:hover { border-color: var(--cat, var(--accent)); color: var(--cat, var(--accent)); }
+@media (max-width: 860px) { .feature { grid-template-columns: 1fr; gap: 24px; } .feature:nth-child(even) .media { order: 0; } }
+
+/* car schematic */
+.schem { width: 100%; height: 100%; }
+.schem .board { fill: var(--surface); }
+.schem .lane { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: round; }
+.schem .body { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.schem .part { fill: var(--surface); stroke: var(--ink); stroke-width: 1.4; }
+.schem .wheel { fill: var(--ink); }
+.schem text { font: 500 11px var(--mono); fill: var(--ink); }
+.schem .dim { stroke: var(--muted); stroke-width: 1; fill: none; }
+.schem .dimt { fill: var(--muted); font-size: 10px; }
+.schem .fov { fill: var(--accent); opacity: .12; }
+
+/* traffic sign grid (signs keep their real-world colors) */
+.signsvg { width: 100%; height: 100%; }
+.signsvg .det { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.signsvg .lab { fill: var(--accent); }
+.signsvg .labt { font: 600 9px var(--mono); fill: #fff; }
+
+/* phone mock */
+.phone {
+  width: 46%; max-width: 210px; aspect-ratio: 9 / 18.5;
+  border: 7px solid var(--ink); border-radius: 30px; background: var(--bg);
+  padding: 18px 12px 12px; display: flex; flex-direction: column; gap: 8px;
+  font-size: 11px; line-height: 1.3; transform: rotate(-4deg);
+}
+.phone .ph-top { display: flex; justify-content: space-between; align-items: center; }
+.phone .ph-top b { font-family: var(--display); font-size: 15px; }
+.phone .ph-search { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 8px; color: var(--muted); }
+.phone .ph-chips { display: flex; gap: 4px; }
+.phone .ph-chips span { padding: 3px 7px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); font-size: 10px; }
+.phone .ph-chips span:first-child { background: var(--ok); color: #fff; border-color: var(--ok); }
+.phone .ph-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.phone .ph-item { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px; }
+.phone .ph-item i { display: block; height: 34px; border-radius: 6px; margin-bottom: 4px; }
+.phone .ph-item small { color: var(--muted); display: block; }
+.phone .ph-cart { margin-top: auto; background: var(--ink); color: var(--bg); border-radius: 10px; padding: 8px 10px; display: flex; justify-content: space-between; font-weight: 600; }
+
+/* terminal mock */
+.term { width: 88%; background: #0B0E17; color: #CDD3E6; border-radius: 8px; overflow: hidden; font: 400 12px/1.6 var(--mono); border: 1px solid #222842; }
+.term-bar { background: #161B2C; padding: 8px 10px; display: flex; gap: 6px; align-items: center; }
+.term-bar i { width: 9px; height: 9px; border-radius: 50%; background: #39405C; }
+.term-bar span { margin-left: 8px; color: #7C85A6; font-size: 11px; }
+.term pre { margin: 0; padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.term .p1 { color: #5E8BFF; } .term .p2 { color: #8AB4F8; } .term .ok { color: #45D19B; } .term .dim { color: #6A7394; }
+.cursor { display: inline-block; width: 7px; height: 13px; background: #CDD3E6; vertical-align: -2px; animation: blink 1s steps(2) infinite; }
+
+/* more projects */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.mini { padding: 24px 22px 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; min-width: 0; background: var(--surface); }
+.mini h3 { font-size: 20px; margin: 0; }
+.mini p { color: var(--muted); font-size: 15px; margin: 0; }
+.mini .tag-row { margin-top: auto; padding-top: 12px; }
+.mini .kind { margin: 0; }
+
+/* experience */
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.timeline li { min-width: 0; }
+.when { display: block; font: 500 13px var(--mono); color: var(--muted); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.timeline h3 { font-size: 21px; margin-bottom: 2px; }
+.org { color: var(--accent); font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+.timeline p { margin: 0; color: var(--muted); max-width: 62ch; }
+.badge { display: inline-block; font: 500 11px var(--mono); color: var(--accent); border: 1px solid currentColor; border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: 3px; }
+.badge.gold { color: #B08400; }
+:root[data-theme="dark"] .badge.gold { color: #F2C14E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge.gold { color: #F2C14E; } }
+@media (max-width: 860px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 28px 32px; }
+.skills h4 { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 10px; }
+.skills ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.skills li { border: 1px solid var(--line); background: var(--surface); padding: 5px 11px; border-radius: 999px; font-size: 15px; }
+
+/* contact */
+.contact { padding-block: 80px 56px; }
+.contact h2 { font-size: clamp(36px, 6vw, 64px); max-width: 16ch; }
+.contact .lede { margin-top: 18px; }
+.c-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px; margin-top: 28px; }
+.c-item { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; box-shadow: var(--shadow); }
+.c-item small { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.c-item .val { font-weight: 600; overflow-wrap: anywhere; user-select: all; }
+.c-item a.val { text-decoration: none; }
+.c-item a.val:hover { color: var(--accent); }
+.copy { align-self: flex-start; margin-top: 6px; font: 500 12px var(--mono); background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; }
+footer { border-top: 1px solid var(--line); padding-block: 24px 40px; font: 400 13px var(--mono); color: var(--muted); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+
+/* --- responsive refinements --- */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav { padding: 12px 16px; }
+  .logo { font-size: 18px; }
+  h1 { font-size: clamp(32px, 10vw, 46px); }
+  h1 .hi { font-size: 0.5em; }
+  .lede { font-size: 16px; }
+  section { padding-block: 40px; }
+  h2 { font-size: clamp(26px, 7vw, 34px); }
+  .contact h2 { font-size: clamp(28px, 9vw, 40px); }
+  .hero { padding-block: 30px 40px; gap: 26px; }
+  .feature { gap: 18px; }
+  .about { gap: 20px; }
+  .sec-head { margin-bottom: 20px; }
+}
+@media (max-width: 400px) {
+  body { padding-inline: 14px; }
+  .nav { margin-inline: -14px; }
+  .actions { width: 100%; }
+  .actions .btn { flex: 1 1 100%; justify-content: center; }
+  .readout b { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec, .cursor { animation: none; }
+  .btn:hover { transform: none; }
+}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">lina<span>.</span>niyazi</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <div class="hero">
+    <div>
+      <div class="chips">
+        <span class="status"><i></i>Open to work · Damascus / remote</span>
+        <span class="status accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+          Top of class · AI Diploma 2026
+        </span>
+      </div>
+      <h1><span class="hi">Hi, I'm Lina.</span>I teach small cars to <em>see the road.</em></h1>
+      <p class="lede">I'm an AI and software developer who just graduated top of my class in Artificial Intelligence. I build computer vision systems, train models, and ship apps people can actually use. I'm looking for a job that fits my experience and helps me keep improving my skills.</p>
+      <div class="actions">
+        <a class="btn" href="#projects">See my work</a>
+        <a class="btn ghost" href="Lina_Niyazi_CV.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+
+    <figure style="margin:0">
+      <div class="feed">
+        <div class="feed-top">
+          <span class="rec" aria-hidden="true"></span>
+          <span>picam0 · lane_follow.py</span>
+          <div class="modes" role="group" aria-label="Camera view">
+            <button type="button" id="mode-raw" data-mode="raw" aria-pressed="false">raw</button>
+            <button type="button" id="mode-edges" data-mode="edges" aria-pressed="false">edges</button>
+            <button type="button" id="mode-lanes" data-mode="lanes" aria-pressed="true">lanes</button>
+          </div>
+        </div>
+        <canvas id="road" aria-label="Simulated camera view of a car following two black lane lines on a white track, with detected lanes drawn on top"></canvas>
+        <div class="readout">
+          <div>Steering<b id="r-steer">0.0°</b></div>
+          <div>Lane offset<b id="r-off">0 px</b></div>
+          <div>Command<b id="r-cmd">straight</b></div>
+        </div>
+      </div>
+      <figcaption class="feed-cap">A simulation of the vision loop from a self-driving car I worked on: find both lane lines, aim for the middle, send a steering angle to the Arduino.</figcaption>
+    </figure>
+  </div>
+
+  <section id="about">
+    <div class="sec-head">
+      <div class="eyebrow">About</div>
+      <h2>Practical builder, happiest when the hardware finally moves.</h2>
+    </div>
+    <div class="sec-body about">
+      <div>
+        <p>I completed my Diploma in Artificial Intelligence at Damascus Training Center (DTC, UNRWA) in 2026, graduating first in my class with an overall grade of 85 (Excellent). Most of what I know I learned by building: a self-driving car on a cardboard track, a CNN that reads traffic signs, a chatbot that screens job applicants, and mobile apps in Flutter.</p>
+        <p>This summer I was selected from more than 130 applicants for an AI product internship at Devista, and at the same time I interned in web and backend development at Vica Web Solutions. I also teach: I've trained people to design and launch their own web apps using AI tools like Google AI Studio, GitHub and Supabase.</p>
+        <p>I care about the moment an idea becomes something that works on a real device, in front of a real person.</p>
+      </div>
+      <ul class="traits">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg>
+          <div><b>Hard-working</b><span>I stay with a bug until the car drives straight.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H22l-6 4.6 2.3 7L12 16.3 5.7 20.5 8 13.5 2 8.9h7.6z"/></svg>
+          <div><b>Excited to learn</b><span>New model, new board, new framework: I want to try it.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          <div><b>Friendly to work with</b><span>I like explaining things, which is why I teach.</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <div class="eyebrow">Selected work</div>
+      <h2>Five projects I'm proudest of.</h2>
+    </div>
+
+    <div class="sec-body">
+      <article class="feature" style="--cat: var(--cat-blue)">
+        <div class="media" data-placeholder="car-photo">
+          <svg class="schem" viewBox="0 0 400 275" role="img" aria-label="Top-down sketch of the car on its track, showing Raspberry Pi 5, Arduino, L298N driver, servo, IMU and camera">
+            <rect class="board" width="400" height="275"/>
+            <path class="lane" d="M70 290 C 80 200, 40 120, 120 -10"/>
+            <path class="lane" d="M330 290 C 320 200, 360 120, 290 -10"/>
+            <path class="fov" d="M200 70 L120 -5 L290 -5 Z"/>
+            <rect class="wheel" x="132" y="78" width="14" height="30" rx="3"/>
+            <rect class="wheel" x="254" y="78" width="14" height="30" rx="3"/>
+            <rect class="wheel" x="132" y="196" width="14" height="30" rx="3"/>
+            <rect class="wheel" x="254" y="196" width="14" height="30" rx="3"/>
+            <rect class="body" x="144" y="62" width="112" height="180" rx="16"/>
+            <rect class="part" x="184" y="66" width="32" height="14" rx="3"/><text x="200" y="77" text-anchor="middle" font-size="9">CAM</text>
+            <rect class="part" x="158" y="88" width="84" height="22" rx="3"/><text x="200" y="103" text-anchor="middle">Servo</text>
+            <rect class="part" x="158" y="118" width="84" height="40" rx="3"/><text x="200" y="142" text-anchor="middle">Pi 5</text>
+            <rect class="part" x="158" y="166" width="48" height="30" rx="3"/><text x="182" y="185" text-anchor="middle" font-size="9">Arduino</text>
+            <rect class="part" x="212" y="166" width="30" height="30" rx="3"/><text x="227" y="185" text-anchor="middle" font-size="9">IMU</text>
+            <rect class="part" x="158" y="204" width="84" height="26" rx="3"/><text x="200" y="221" text-anchor="middle">L298N</text>
+            <path class="dim" d="M276 62 v180 M272 62 h8 M272 242 h8"/>
+            <text class="dimt" x="284" y="156">36 cm</text>
+            <path class="dim" d="M144 256 h112 M144 252 v8 M256 252 v8"/>
+            <text class="dimt" x="200" y="270" text-anchor="middle">20 cm</text>
+          </svg>
+        </div>
+        <div>
+          <div class="kind">Graduation project · 2026</div>
+          <h3>Autonomous Vehicle System</h3>
+          <p>A small autonomous car that drives itself between two lane lines and reacts to what it sees on the road. The Raspberry Pi 5 runs the vision code; the Arduino drives the motor and steering servo.</p>
+          <ul class="points">
+            <li>Lane following with a forward camera, including curves</li>
+            <li>Detects traffic lights, traffic signs, pedestrians and vehicles in real time</li>
+            <li>Built and tuned on a custom white track with black lane lines</li>
+          </ul>
+          <ul class="tag-row"><li>Python</li><li>OpenCV</li><li>Raspberry Pi 5</li><li>Arduino</li><li>L298N</li><li>IMU</li></ul>
+          <div class="link-row"><a href="https://github.com/linaniyazi/smartcar" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+      </article>
+
+      <article class="feature" style="--cat: var(--cat-teal)">
+        <div class="media" data-placeholder="grocery-screens">
+          <div class="phone" aria-hidden="true">
+            <div class="ph-top"><b>Fresh</b><span>🛒 3</span></div>
+            <div class="ph-search">Search groceries</div>
+            <div class="ph-chips"><span>Fruit</span><span>Dairy</span><span>Bakery</span></div>
+            <div class="ph-grid">
+              <div class="ph-item"><i style="background:#F3C5D3"></i>Strawberries<small>500 g</small></div>
+              <div class="ph-item"><i style="background:#CDE8C6"></i>Avocado<small>2 pcs</small></div>
+              <div class="ph-item"><i style="background:#D3DAF8"></i>Milk<small>1 L</small></div>
+              <div class="ph-item"><i style="background:#F1E6B8"></i>Bread<small>1 loaf</small></div>
+            </div>
+            <div class="ph-cart"><span>View cart</span><span>3 items</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="kind">Mobile app · Flutter</div>
+          <h3>Grocery Store App</h3>
+          <p>A Flutter app for ordering groceries: browse by category, search products, and build a cart. I focused on a clean, responsive UI that works across screen sizes and a structure that can grow into a full store.</p>
+          <ul class="points">
+            <li>Category browsing, search and cart flow</li>
+            <li>Responsive layouts for small and large phones</li>
+            <li>Organized so a real backend can plug in later</li>
+          </ul>
+          <ul class="tag-row"><li>Flutter</li><li>Dart</li><li>UI design</li></ul>
+          <div class="link-row"><a href="https://github.com/linaniyazi/goodgoods" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+      </article>
+
+      <article class="feature" style="--cat: var(--cat-amber)">
+        <div class="media" data-placeholder="zphisher-terminal">
+          <div class="term" aria-hidden="true">
+            <div class="term-bar"><i></i><i></i><i></i><span>lina@kali: ~/zphisher</span></div>
+<pre><span class="p1">┌──(</span><span class="p2">lina㉿kali</span><span class="p1">)-[~]</span>
+<span class="p1">└─$</span> git clone https://github.com/htr-tech/zphisher
+<span class="dim">Cloning into 'zphisher'... done.</span>
+<span class="p1">┌──(</span><span class="p2">lina㉿kali</span><span class="p1">)-[~/zphisher]</span>
+<span class="p1">└─$</span> ls
+zphisher.sh   sites/   README.md
+<span class="p1">└─$</span> <span class="dim"># isolated lab only — studying how real a cloned page looks</span>
+<span class="p1">└─$</span> echo "Always verify the URL before you sign in"
+<span class="ok">Always verify the URL before you sign in</span>
+<span class="p1">└─$</span> <span class="cursor"></span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="kind">Cybersecurity · Kali Linux</div>
+          <h3>Phishing Awareness Demo</h3>
+          <p>A learning project on Kali Linux using the Zphisher tool, which clones a login page so it looks almost identical to the real one. I built it to show how convincing a fake page can be, and to raise awareness: never enter your details on a link you don't fully trust.</p>
+          <ul class="points">
+            <li>Used Zphisher in an isolated lab to see how closely a page can mimic the real site</li>
+            <li>Highlighted the warning signs, above all checking the real URL before signing in</li>
+            <li>Turned the experiment into simple tips for spotting phishing links</li>
+          </ul>
+          <ul class="tag-row"><li>Kali Linux</li><li>Zphisher</li><li>Phishing awareness</li><li>Linux CLI</li></ul>
+        </div>
+      </article>
+
+      <article class="feature" style="--cat: var(--cat-violet)">
+        <div class="media" data-placeholder="traffic-sign-photo">
+          <svg class="signsvg" viewBox="0 0 400 275" role="img" aria-label="Grid of traffic signs with two detected by bounding boxes labelled with class and confidence">
+            <polygon points="99.6,90.3 82.3,107.6 57.7,107.6 40.4,90.3 40.4,65.7 57.7,48.4 82.3,48.4 99.6,65.7" fill="#C7343B"/>
+            <text x="70" y="83" text-anchor="middle" fill="#fff" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="15">STOP</text>
+            <circle cx="200" cy="78" r="32" fill="#fff" stroke="#C7343B" stroke-width="6"/>
+            <text x="200" y="86" text-anchor="middle" fill="#1A1A1A" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="22">60</text>
+            <path d="M298 54 L362 54 L330 110 Z" fill="#fff" stroke="#C7343B" stroke-width="5" stroke-linejoin="round"/>
+            <circle cx="70" cy="200" r="30" fill="#C7343B"/>
+            <rect x="52" y="195" width="36" height="10" rx="2" fill="#fff"/>
+            <circle cx="200" cy="200" r="30" fill="#2F57C4"/>
+            <path d="M213 200 H190 M201 189 L188 200 L201 211" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="330" cy="200" r="30" fill="#2F57C4"/>
+            <path d="M330 213 V187 M319 198 L330 186 L341 198" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect class="det" x="36" y="45" width="68" height="66" rx="4"/>
+            <rect class="lab" x="36" y="33" width="60" height="13" rx="2"/>
+            <text class="labt" x="40" y="43">stop 0.99</text>
+            <rect class="det" x="166" y="45" width="68" height="66" rx="4"/>
+            <rect class="lab" x="166" y="33" width="52" height="13" rx="2"/>
+            <text class="labt" x="170" y="43">60 0.97</text>
+          </svg>
+        </div>
+        <div>
+          <div class="kind">Deep learning · 2026</div>
+          <h3>Traffic Sign Classifier</h3>
+          <p>A convolutional neural network that reads German traffic signs from the GTSRB dataset. It's the same kind of perception a self-driving car needs to understand and obey the road.</p>
+          <ul class="points">
+            <li>Classifies 43 types of traffic sign from a single image</li>
+            <li>Trained and evaluated on the GTSRB benchmark dataset</li>
+            <li>A natural companion to the lane-following car</li>
+          </ul>
+          <ul class="tag-row"><li>Python</li><li>CNN</li><li>Deep Learning</li><li>GTSRB</li></ul>
+        </div>
+      </article>
+
+      <article class="feature" style="--cat: var(--cat-green)">
+        <div class="media">
+          <video src="pathly/demo.mp4" poster="pathly/poster.png" controls muted playsinline preload="metadata"
+            style="width:100%;height:100%;object-fit:contain;display:block;background:#0a0f1e"
+            aria-label="Demo video of Pathly: setting a goal, taking a placement test, failing a quiz and watching the learning path adapt"></video>
+        </div>
+        <div>
+          <div class="kind">Full-stack AI · 2026</div>
+          <h3>Pathly, an AI Tutor That Adapts</h3>
+          <p>Pathly turns a learning goal into a personalized skill path and quizzes you on every step. Where a chatbot hands you a plan and forgets you, Pathly rewrites the plan around the exact questions you miss.</p>
+          <ul class="points">
+            <li>Fail a quiz and the AI inserts catch-up steps that target your exact mistakes</li>
+            <li>Missed questions return as review cards after 1, 3, 7 and 14 days</li>
+            <li>Every suggested link is verified, and made-up YouTube videos are caught</li>
+          </ul>
+          <ul class="tag-row"><li>React</li><li>FastAPI</li><li>SQLite</li><li>Gemini API</li></ul>
+          <div class="link-row">
+            <a href="pathly/case-study.html" target="_blank" rel="noopener">Case study ↗</a>
+            <a href="https://github.com/linaniyazi/pathly" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="sec-head">
+      <div class="eyebrow">More projects</div>
+      <h2>Models, apps and experiments.</h2>
+    </div>
+    <div class="sec-body grid3">
+      <article class="mini" style="--cat: var(--cat-blue)">
+        <div class="kind">Computer vision</div>
+        <h3>Age Detection</h3>
+        <p>Estimates a person's age from a photo or a live camera feed.</p>
+        <ul class="tag-row"><li>Python</li><li>OpenCV</li></ul>
+      </article>
+      <article class="mini" style="--cat: var(--cat-violet)">
+        <div class="kind">NLP</div>
+        <h3>Recruitment Chatbot</h3>
+        <p>Talks with job applicants, collects their details, and simulates first-round screening.</p>
+        <ul class="tag-row"><li>Python</li><li>Rasa</li></ul>
+      </article>
+      <article class="mini" style="--cat: var(--cat-teal)">
+        <div class="kind">Android · AI-assisted</div>
+        <h3>Money Tracker</h3>
+        <p>An Android app for logging income and expenses, built quickly with Google AI Studio.</p>
+        <ul class="tag-row"><li>Android</li><li>Google AI Studio</li></ul>
+      </article>
+      <article class="mini" style="--cat: var(--cat-green)">
+        <div class="kind">Teaching</div>
+        <h3>Build a Web App with AI</h3>
+        <p>A hands-on course where I trained people to design and launch web apps using vibe coding.</p>
+        <ul class="tag-row"><li>AI Studio</li><li>GitHub</li><li>Supabase</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked and taught.</h2>
+    </div>
+    <ol class="sec-body timeline" reversed>
+      <li>
+        <div class="when">Jun – Jul 2026</div>
+        <div>
+          <h3>AI Product Development Associate Intern <span class="badge">1 of 130+</span></h3>
+          <div class="org">Devista · Damascus</div>
+          <p>Worked independently under the guidance of mentors to turn product ideas into working AI-powered concepts, with a focus on real user needs and business use cases.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">Jun – Jul 2026</div>
+        <div>
+          <h3>Web Development &amp; Backend Intern</h3>
+          <div class="org">Vica Web Solutions · Damascus</div>
+          <p>Implemented features, tested and debugged web applications, and helped improve their usability, performance and reliability.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">2026</div>
+        <div>
+          <h3>Trainer, Web Apps with AI</h3>
+          <div class="org">Independent course</div>
+          <p>Taught people to design and publish their own web apps with vibe coding, using Google AI Studio, GitHub and Supabase.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">Completed 2026</div>
+        <div>
+          <h3>Diploma in Artificial Intelligence <span class="badge gold">Top of class · 85 / Excellent</span></h3>
+          <div class="org">Damascus Training Center (DTC) · UNRWA</div>
+          <p>Graduated first in my class with an overall grade of 85 (Excellent). Studied artificial intelligence, software development, computer vision and emerging technologies.</p>
+        </div>
+      </li>
+      <li>
+        <div class="when">Aug – Sep 2024</div>
+        <div>
+          <h3>AI Short Course</h3>
+          <div class="org">SPA</div>
+          <p>AI fundamentals, practical AI tools and AI workflows.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <div class="eyebrow">Skills</div>
+      <h2>What I work with.</h2>
+    </div>
+    <div class="sec-body skills">
+      <div><h4>AI &amp; ML</h4><ul><li>Machine Learning</li><li>Computer Vision</li><li>Deep Learning</li><li>CNNs</li><li>NLP</li></ul></div>
+      <div><h4>Languages</h4><ul><li>Python</li><li>C#</li><li>Dart</li></ul></div>
+      <div><h4>Frameworks</h4><ul><li>OpenCV</li><li>Flutter</li><li>Rasa</li><li>Unity</li><li>React</li><li>FastAPI</li></ul></div>
+      <div><h4>Hardware &amp; systems</h4><ul><li>Raspberry Pi</li><li>Arduino</li><li>Linux</li><li>Kali Linux</li></ul></div>
+      <div><h4>Data &amp; cloud</h4><ul><li>MySQL</li><li>SQLite</li><li>Supabase</li><li>GitHub</li></ul></div>
+      <div><h4>Product</h4><ul><li>Product development</li><li>Business analysis</li><li>User-centered design</li></ul></div>
+      <div><h4>Office &amp; ICDL</h4><ul><li>ICDL</li><li>Word</li><li>Excel</li><li>PowerPoint</li></ul></div>
+      <div><h4>Languages spoken</h4><ul><li>Arabic · native</li><li>English · B2</li></ul></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="tbox">
+      <div class="eyebrow">Contact</div>
+      <h2>Have a role where I could help? Let's talk.</h2>
+      <p class="lede">I'm open to full-time roles in AI, computer vision, machine learning and software development, in Damascus or remote.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="Lina_Niyazi_CV.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+        Download CV
+      </a>
+    </div>
+    <div class="c-list">
+      <div class="c-item"><small>Email</small><span class="val" id="email">linaniyazi07@gmail.com</span><button class="copy" type="button" data-copy="email">Copy</button></div>
+      <div class="c-item"><small>Phone</small><span class="val" id="phone">+963 968 861 725</span><button class="copy" type="button" data-copy="phone">Copy</button></div>
+      <div class="c-item"><small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/lina-niyazi-a372b8387" target="_blank" rel="noopener">Lina Niyazi ↗</a></div>
+      <div class="c-item"><small>GitHub</small><a class="val" href="https://github.com/linaniyazi" target="_blank" rel="noopener">linaniyazi ↗</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Lina Niyazi</span>
+    <span>Built by hand, tested on a cardboard track.</span>
+  </footer>
+</main>
+
+<script>
+/* theme */
+(function () {
+  const root = document.documentElement;
+  try { const s = localStorage.getItem('theme'); if (s) root.dataset.theme = s; } catch (e) {}
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const cur = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+})();
+
+/* copy buttons */
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+  const el = document.getElementById(b.dataset.copy);
+  const done = () => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1500); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected, press Ctrl+C'; };
+  try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (e) { fallback(); }
+}));
+
+/* lane-following camera simulation */
+(function () {
+  const cv = document.getElementById('road');
+  const ctx = cv.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let mode = 'lanes', W = 0, H = 0, dpr = 1;
+  const rSteer = document.getElementById('r-steer'), rOff = document.getElementById('r-off'), rCmd = document.getElementById('r-cmd');
+
+  document.querySelectorAll('.modes button').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll('.modes button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    if (reduce) frame(4);
+  }));
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = cv.getBoundingClientRect();
+    W = cv.width = Math.round(r.width * dpr);
+    H = cv.height = Math.round(r.height * dpr);
+  }
+
+  function proj(d, x, hz) {
+    const s = 1 / d;
+    return [W / 2 + x * s * W * 0.46, hz + (H - hz) * s];
+  }
+
+  function frame(t) {
+    const hz = H * 0.34;
+    const curve = 0.9 * Math.sin(t * 0.33) + 0.35 * Math.sin(t * 0.83 + 1.3);
+    const drift = 0.22 * Math.sin(t * 0.57 + 0.4);
+    const center = d => curve * 0.018 * (d - 1) * (d - 1) - drift;
+    const lw = 0.075;
+
+    const dark = mode === 'edges';
+    ctx.fillStyle = dark ? '#05070D' : '#8F98AB';
+    ctx.fillRect(0, 0, W, hz);
+    if (!dark) {
+      const g = ctx.createLinearGradient(0, hz, 0, H);
+      g.addColorStop(0, '#D9DCE2'); g.addColorStop(1, '#F4F5F7');
+      ctx.fillStyle = g;
+    }
+    ctx.fillRect(0, hz, W, H - hz);
+
+    for (const side of [-1, 1]) {
+      const L = [], R = [];
+      for (let d = 1; d <= 16; d += 0.2) {
+        const c = center(d) + side;
+        L.push(proj(d, c - lw, hz)); R.push(proj(d, c + lw, hz));
+      }
+      ctx.beginPath();
+      L.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
+      for (let i = R.length - 1; i >= 0; i--) ctx.lineTo(R[i][0], R[i][1]);
+      ctx.closePath();
+      if (dark) { ctx.strokeStyle = '#F2F4FF'; ctx.lineWidth = 1.2 * dpr; ctx.stroke(); }
+      else { ctx.fillStyle = '#15161A'; ctx.fill(); }
+    }
+    if (dark) { ctx.strokeStyle = 'rgba(242,244,255,.5)'; ctx.lineWidth = dpr; ctx.beginPath(); ctx.moveTo(0, hz); ctx.lineTo(W, hz); ctx.stroke(); }
+
+    const near = 1.05, far = 3.2;
+    const lp = [proj(near, center(near) - 1, hz), proj(far, center(far) - 1, hz)];
+    const rp = [proj(near, center(near) + 1, hz), proj(far, center(far) + 1, hz)];
+    const look = 2.4;
+    const m = proj(look, center(look), hz);
+    const steer = Math.atan2(m[0] - W / 2, H - m[1]) * 180 / Math.PI;
+    const offPx = Math.round(((lp[0][0] + rp[0][0]) / 2 - W / 2) / dpr);
+
+    if (mode === 'lanes') {
+      ctx.setLineDash([6 * dpr, 6 * dpr]);
+      ctx.strokeStyle = 'rgba(43,92,138,.55)'; ctx.lineWidth = 1.5 * dpr;
+      const roiY = proj(far, 0, hz)[1];
+      ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(W * 0.18, roiY); ctx.lineTo(W * 0.82, roiY); ctx.lineTo(W, H); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = 'rgba(43,92,138,.9)'; ctx.lineWidth = 7 * dpr;
+      for (const p of [lp, rp]) { ctx.beginPath(); ctx.moveTo(p[0][0], p[0][1]); ctx.lineTo(p[1][0], p[1][1]); ctx.stroke(); }
+      ctx.fillStyle = 'rgba(43,92,138,.12)';
+      ctx.beginPath(); ctx.moveTo(lp[0][0], lp[0][1]); ctx.lineTo(lp[1][0], lp[1][1]); ctx.lineTo(rp[1][0], rp[1][1]); ctx.lineTo(rp[0][0], rp[0][1]); ctx.fill();
+      ctx.strokeStyle = '#13A89E'; ctx.lineWidth = 3 * dpr;
+      ctx.beginPath(); ctx.moveTo(W / 2, H); ctx.lineTo(m[0], m[1]); ctx.stroke();
+      ctx.fillStyle = '#13A89E'; ctx.beginPath(); ctx.arc(m[0], m[1], 6 * dpr, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = 'rgba(22,24,29,.35)'; ctx.lineWidth = 1 * dpr; ctx.setLineDash([3 * dpr, 4 * dpr]);
+      ctx.beginPath(); ctx.moveTo(W / 2, H); ctx.lineTo(W / 2, roiY); ctx.stroke(); ctx.setLineDash([]);
+      ctx.font = `500 ${11 * dpr}px "JetBrains Mono", monospace`;
+      const label = `steer ${steer >= 0 ? '+' : ''}${steer.toFixed(1)}°`;
+      const tw = ctx.measureText(label).width;
+      const lx = Math.min(Math.max(m[0] + 10 * dpr, 8 * dpr), W - tw - 16 * dpr), ly = m[1] - 10 * dpr;
+      ctx.fillStyle = 'rgba(22,24,29,.85)'; ctx.fillRect(lx - 6 * dpr, ly - 13 * dpr, tw + 12 * dpr, 19 * dpr);
+      ctx.fillStyle = '#FFFFFF'; ctx.fillText(label, lx, ly);
+    }
+
+    rSteer.textContent = (steer >= 0 ? '+' : '') + steer.toFixed(1) + '°';
+    rOff.textContent = (offPx >= 0 ? '+' : '') + offPx + ' px';
+    rCmd.textContent = steer > 4 ? 'turn right' : steer < -4 ? 'turn left' : 'straight';
+  }
+
+  resize();
+  addEventListener('resize', () => { resize(); if (reduce) frame(4); });
+  if (reduce) { frame(4); return; }
+  let visible = true;
+  new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(cv);
+  const t0 = performance.now();
+  (function loop(now) {
+    if (visible && !document.hidden) frame((now - t0) / 1000);
+    requestAnimationFrame(loop);
+  })(t0);
+})();
+</script>
